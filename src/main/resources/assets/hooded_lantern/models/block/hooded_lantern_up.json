@@ -1,15 +1,13 @@
 {
-	"format_version": "1.9.0",
-	"credit": "Made with Blockbench",
-	"texture_size": [32, 32],
+	"parent": "block/block",
 	"textures": {
-		"2": "covered_lantern_up"
+		"2": "hooded_lantern:block/hooded_lantern",
+		"particle": "hooded_lantern:block/hooded_lantern"
 	},
 	"elements": [
 		{
 			"from": [5, 0, 5],
 			"to": [11, 7, 11],
-			"rotation": {"angle": 0, "axis": "y", "origin": [7, 0, 7]},
 			"faces": {
 				"north": {"uv": [0, 0, 3, 3.5], "texture": "#2"},
 				"east": {"uv": [3, 0, 6, 3.5], "texture": "#2"},
@@ -22,7 +20,6 @@
 		{
 			"from": [6, 7, 6],
 			"to": [10, 9, 10],
-			"rotation": {"angle": 0, "axis": "y", "origin": [7, 7, 7]},
 			"faces": {
 				"north": {"uv": [2, 7, 4, 8], "texture": "#2"},
 				"east": {"uv": [4, 7, 6, 8], "texture": "#2"},

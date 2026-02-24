@@ -1,6 +1,10 @@
-package com.daniel.HoodedLanternmod;
+package com.daniel.hooded_lantern;
 
+import com.daniel.hooded_lantern.blocks.ModBlocks;
+import com.daniel.hooded_lantern.items.ModCreativeModTabs;
+import com.daniel.hooded_lantern.items.ModItems;
 import com.mojang.logging.LogUtils;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -14,23 +18,25 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
 
-@Mod(hooded_lantern.MOD_ID)
-public class hooded_lantern
+@Mod(HoodedLanternMod.MOD_ID)
+public class HoodedLanternMod
 {
 
     public static final String MOD_ID = "hooded_lantern";
 
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public hooded_lantern(FMLJavaModLoadingContext context)
-    {
-        IEventBus modEventBus = context.getModEventBus();
+    public HoodedLanternMod() {
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ModCreativeModTabs.register(modEventBus);
+        ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
+        modEventBus.addListener(this::addCreative);
 
         MinecraftForge.EVENT_BUS.register(this);
-
-        modEventBus.addListener(this::addCreative);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)
@@ -41,7 +47,9 @@ public class hooded_lantern
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
-
+        if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
+            event.accept(ModBlocks.HOODED_LANTERN.get().asItem());
+        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
